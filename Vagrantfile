@@ -18,6 +18,11 @@ Vagrant.configure('2') do |config|
     minion01.vm.box_check_update = true
     minion01.vm.network :private_network, ip: '192.168.37.11'
     minion01.vm.hostname = 'minion01'
+    minion01.vm.provision :salt do |salt|
+      salt.masterless = false
+      install_type = 'stable'
+      minion_id = 'minion01'
+    end
     minion01.vm.provision :shell, path: "minion_bootstrap.sh"
   end
 

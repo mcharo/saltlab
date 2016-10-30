@@ -14,7 +14,7 @@ cat <<EOF >>/etc/hosts
 EOF
 
 adduser saltapi
-echo "saltapi:saltapiBull!" | sudo chpasswd
+echo "saltapi:password" | sudo chpasswd
 
 salt-call --local tls.create_self_signed_cert
 
@@ -33,6 +33,7 @@ external_auth:
       - '@key'
 EOF
 
+mkdir -p /home/vagrant/bin
 cat <<EOF > /home/vagrant/bin/slt
 #!/bin/bash
 sudo salt "$1*" ${@:2}
